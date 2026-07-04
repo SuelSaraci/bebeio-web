@@ -21,12 +21,31 @@ if (process.env.NODE_ENV === "production") {
       "Content-Security-Policy",
       [
         "default-src 'self'",
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.paddle.com https://cdn.paddle.com",
-        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-        "font-src 'self' https://fonts.gstatic.com",
+        [
+          "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+          "https://*.paddle.com",
+          "https://cdn.paddle.com",
+          "https://public.profitwell.com",
+          "https://apis.google.com",
+          "https://accounts.google.com",
+          "https://www.gstatic.com",
+        ].join(" "),
+        [
+          "style-src 'self' 'unsafe-inline'",
+          "https://fonts.googleapis.com",
+          "https://cdn.paddle.com",
+          "https://*.paddle.com",
+        ].join(" "),
+        "font-src 'self' https://fonts.gstatic.com https://cdn.paddle.com",
         "img-src 'self' data: https: blob:",
         "connect-src 'self' https: wss:",
-        "frame-src https://*.paddle.com",
+        [
+          "frame-src",
+          "https://*.paddle.com",
+          "https://accounts.google.com",
+          "https://*.google.com",
+          "https://bebeio.firebaseapp.com",
+        ].join(" "),
       ].join("; "),
     );
     next();
