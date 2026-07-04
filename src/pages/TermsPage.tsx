@@ -10,21 +10,29 @@ export function TermsPage() {
         <h1 className="mt-6 text-3xl font-bold">Terms of Service</h1>
         <div className="prose prose-sm mt-6 max-w-none text-[#2C1810]">
           <p>
-            Bebio is a mobile baby-tracking application operated by CinzoTech
-            L.L.C. By using our website or mobile app, you agree to these
-            terms.
+            Bebio is a mobile parenting journal and baby activity organizer
+            operated by CinzoTech L.L.C. By using our website or mobile app, you
+            agree to these terms.
+          </p>
+          <h2>What Bebio provides</h2>
+          <p>
+            Bebio is software that helps parents and caregivers log daily baby
+            activities (such as feeding, sleep, and diapers), view trends, and
+            optionally receive general AI parenting tips. Bebio is not a medical
+            service, healthcare provider, or telehealth platform.
           </p>
           <h2>Subscriptions</h2>
           <p>
             Bebio Plus is sold through our website via Paddle. Subscriptions
-            renew automatically until canceled. Premium access is tied to your
+            renew automatically until canceled. Plus access is tied to your
             account and works in the mobile app after you sign in.
           </p>
-          <h2>Medical disclaimer</h2>
+          <h2>Important notice</h2>
           <p>
-            Bebio provides general parenting information and is not a substitute
-            for professional medical advice. Always consult your pediatrician for
-            health concerns.
+            Content in Bebio — including AI responses — is for general
+            informational and organizational purposes only. It is not professional
+            advice. For questions about your child&apos;s wellbeing, consult a
+            qualified professional.
           </p>
           <h2>Contact</h2>
           <p>For support, contact us through the email listed on bebeio.com.</p>

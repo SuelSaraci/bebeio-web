@@ -11,11 +11,12 @@ export function PrivacyPage() {
         <div className="prose prose-sm mt-6 max-w-none text-[#2C1810]">
           <p>
             We respect your privacy. This policy explains what we collect and how
-            we use it when you use Bebio.
+            we use it when you use Bebio — a parenting journal and activity
+            organizer for families.
           </p>
           <h2>Account data</h2>
           <p>
-            We store your email, baby profile, and tracking logs to provide the
+            We store your email, baby profile, and activity logs to provide the
             service. Authentication is handled by Firebase.
           </p>
           <h2>Payments</h2>
@@ -25,9 +26,9 @@ export function PrivacyPage() {
           </p>
           <h2>AI features</h2>
           <p>
-            AI requests may include your baby's logged data to personalize
-            responses. Do not enter sensitive medical information you do not want
-            processed by our AI provider.
+            Optional AI tips may use your baby&apos;s logged activities and age to
+            personalize responses. Do not enter information you do not want
+            processed by our AI provider. AI output is not professional advice.
           </p>
         </div>
       </div>

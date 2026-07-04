@@ -144,10 +144,11 @@ export function UpgradePage() {
           </div>
           <h1 className="text-3xl font-bold">{BEBIO_PLUS.productName}</h1>
           <p className="mt-3 max-w-xl text-white/90">
-            Premium subscription for the Bebio baby tracking app — unlimited
-            tracking, AI guidance, and reports. Sign in with the same account on
-            iOS or Android after purchase.
+            Software subscription for the Bebio parenting journal — unlimited
+            logging, AI parenting tips, and journal exports. Sign in with the
+            same account on iOS or Android after purchase.
           </p>
+          <p className="mt-4 text-sm text-white/80">{BEBIO_PLUS.disclaimer}</p>
         </div>
 
         {hasPremium ? (
@@ -251,6 +252,7 @@ export function UpgradePage() {
               </p>
               <p>{BEBIO_PLUS.taxNote}</p>
               <p>{BEBIO_PLUS.billingNote}</p>
+              <p>{BEBIO_PLUS.disclaimer}</p>
               <p>
                 Secure checkout powered by Paddle. Cancel anytime from your
                 Paddle customer portal.

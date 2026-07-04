@@ -31,7 +31,7 @@ const features = [
   {
     icon: Brain,
     title: "AI parenting assistant",
-    text: "Get guidance tailored to your baby's age and daily logs.",
+    text: "Get everyday parenting tips tailored to your baby's age and logged routines.",
   },
 ];
 
@@ -77,15 +77,16 @@ export function LandingPage() {
           <div>
             <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#FFF0EC] px-3 py-1 text-sm font-medium text-[#D95C74]">
               <Sparkles size={14} />
-              Mobile-first baby care
+              Parenting journal & activity tracker
             </div>
             <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-              Calmer days with smarter baby tracking
+              A calmer routine with your baby&apos;s day in one place
             </h1>
             <p className="mt-5 max-w-xl text-lg leading-8 text-[#9B7B72]">
-              Bebio helps you track feeding, sleep, growth, and health — with an
-              AI assistant that understands your baby's real data. Download the
-              app on iOS or Android, then upgrade to Plus on the web.
+              Bebio is a mobile parenting journal for logging feeding, sleep,
+              diapers, and milestones — plus optional AI tips for everyday
+              questions. Download the app on iOS or Android, then upgrade to
+              Plus on the web.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
@@ -108,7 +109,7 @@ export function LandingPage() {
             <p className="text-sm uppercase tracking-wide text-white/80">
               {BEBIO_PLUS.productName}
             </p>
-            <h2 className="mt-2 text-3xl font-bold">Unlimited care tools</h2>
+            <h2 className="mt-2 text-3xl font-bold">Unlimited journal tools</h2>
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               <div className="rounded-2xl bg-white/10 p-4">
                 <p className="text-sm text-white/80">Monthly</p>
@@ -150,8 +151,8 @@ export function LandingPage() {
         >
           <h2 className="text-2xl font-bold">{BEBIO_PLUS.productName} pricing</h2>
           <p className="mt-3 max-w-3xl text-[#9B7B72]">
-            Public pricing for the Bebio premium subscription. Prices shown here
-            are the same as at Paddle checkout.
+            {BEBIO_PLUS.productCategory}. Prices shown here are the same as at
+            Paddle checkout.
           </p>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             {(["monthly", "yearly"] as const).map((plan) => {
@@ -186,6 +187,16 @@ export function LandingPage() {
           </div>
           <p className="mt-6 text-sm text-[#9B7B72]">{BEBIO_PLUS.taxNote}</p>
           <p className="mt-2 text-sm text-[#9B7B72]">{BEBIO_PLUS.billingNote}</p>
+          <p className="mt-2 text-sm text-[#9B7B72]">{BEBIO_PLUS.disclaimer}</p>
+        </section>
+
+        <section className="mt-12 rounded-3xl border border-[rgba(44,24,16,0.09)] bg-[#FFF0EC] p-6 text-sm leading-6 text-[#9B7B72]">
+          <p className="font-semibold text-[#2C1810]">What Bebio is (and isn&apos;t)</p>
+          <p className="mt-2">
+            Bebio is parenting software — a private journal and organizer for
+            families. It is not a medical service, telehealth platform, or
+            substitute for professional advice.
+          </p>
         </section>
 
         <section className="mt-20 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -211,9 +222,9 @@ export function LandingPage() {
         >
           <h2 className="text-2xl font-bold">Download Bebio</h2>
           <p className="mx-auto mt-3 max-w-2xl text-[#9B7B72]">
-            Bebio is a native mobile app. Install it on your phone, create an
-            account, and start tracking for free. Upgrade to Plus anytime on this
-            website with the same login.
+            Bebio is a native mobile parenting journal. Install it on your phone,
+            create an account, and start logging for free. Upgrade to Plus
+            anytime on this website with the same login.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <div className="inline-flex items-center gap-2 rounded-2xl bg-[#2C1810] px-5 py-3 text-sm font-semibold text-white">
