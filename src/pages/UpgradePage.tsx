@@ -7,13 +7,9 @@ import { useSubscription } from "../hooks/useSubscription";
 import { AuthModal } from "../components/AuthModal";
 import { createSubscriptionCheckout } from "../services/subscriptionsService";
 import { initPaddle, openPaddleCheckout } from "../services/paddleService";
+import { BEBIO_PLUS, type BillingPlan } from "../lib/pricing";
 
-type BillingPlan = "monthly" | "yearly";
-
-const plans = {
-  monthly: { label: "$5/mo", amount: 5 },
-  yearly: { label: "$50/yr", amount: 50, savings: 17 },
-};
+const plans = BEBIO_PLUS.plans;
 
 export function UpgradePage() {
   const navigate = useNavigate();
@@ -141,15 +137,16 @@ export function UpgradePage() {
         </Link>
       </header>
 
-      <main className="mx-auto max-w-3xl px-6 pb-16 pt-6">
+      <main className="mx-auto max-w-3xl px-6 pb-16 pt-6" id="pricing">
         <div className="rounded-[32px] bg-gradient-to-br from-[#D95C74] to-[#E11D48] p-8 text-white">
           <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15">
             <Sparkles size={22} />
           </div>
-          <h1 className="text-3xl font-bold">Bebio Plus</h1>
+          <h1 className="text-3xl font-bold">{BEBIO_PLUS.productName}</h1>
           <p className="mt-3 max-w-xl text-white/90">
-            Unlimited tracking, AI guidance, and premium insights — synced to
-            your mobile app when you sign in with the same account.
+            Premium subscription for the Bebio baby tracking app — unlimited
+            tracking, AI guidance, and reports. Sign in with the same account on
+            iOS or Android after purchase.
           </p>
         </div>
 
@@ -170,50 +167,66 @@ export function UpgradePage() {
           </div>
         ) : (
           <>
-            <div className="mt-8 grid grid-cols-2 gap-3 rounded-2xl bg-white p-2 shadow-sm">
-              {(["monthly", "yearly"] as const).map((plan) => (
-                <button
-                  key={plan}
-                  onClick={() => setBillingPlan(plan)}
-                  className={`rounded-xl px-4 py-3 text-sm font-semibold ${
-                    billingPlan === plan
-                      ? "bg-[#D95C74] text-white"
-                      : "text-[#9B7B72]"
-                  }`}
-                >
-                  {plan === "monthly" ? "Monthly" : "Yearly"}
-                  {plan === "yearly" && plans.yearly.savings ? (
-                    <span className="ml-2 rounded-full bg-white/20 px-2 py-0.5 text-xs">
-                      Save {plans.yearly.savings}%
-                    </span>
-                  ) : null}
-                </button>
-              ))}
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              {(["monthly", "yearly"] as const).map((plan) => {
+                const details = plans[plan];
+                const selected = billingPlan === plan;
+                return (
+                  <button
+                    key={plan}
+                    type="button"
+                    onClick={() => setBillingPlan(plan)}
+                    className={`rounded-2xl border p-5 text-left transition ${
+                      selected
+                        ? "border-[#D95C74] bg-[#FFF0EC] ring-2 ring-[#D95C74]"
+                        : "border-[rgba(44,24,16,0.09)] bg-white"
+                    }`}
+                  >
+                    <p className="text-sm font-semibold text-[#9B7B72]">
+                      {details.label}
+                    </p>
+                    <p className="mt-2 text-3xl font-bold">{details.priceLabel}</p>
+                    <p className="text-sm font-medium text-[#2C1810]">
+                      {BEBIO_PLUS.currency} / {details.interval}
+                    </p>
+                    <p className="mt-2 text-sm text-[#9B7B72]">
+                      {details.description}
+                    </p>
+                    {plan === "yearly" && details.savingsPercent ? (
+                      <p className="mt-2 text-xs font-semibold text-[#D95C74]">
+                        Save {details.savingsPercent}% vs monthly billing
+                      </p>
+                    ) : null}
+                  </button>
+                );
+              })}
             </div>
 
             <div className="mt-6 rounded-3xl border border-[rgba(44,24,16,0.09)] bg-white p-6">
-              <div className="flex items-start justify-between gap-4">
+              <div className="flex items-start justify-between gap-4 border-b border-[rgba(44,24,16,0.09)] pb-5">
                 <div>
-                  <h2 className="text-xl font-bold">Bebio Plus</h2>
+                  <h2 className="text-xl font-bold">{BEBIO_PLUS.productName}</h2>
                   <p className="mt-1 text-sm text-[#9B7B72]">
-                    Billed {billingPlan === "monthly" ? "monthly" : "yearly"} via
-                    Paddle
+                    {plans[billingPlan].billingLabel} · recurring subscription
                   </p>
                 </div>
-                <p className="text-3xl font-bold">
-                  {plans[billingPlan].label}
-                </p>
+                <div className="text-right">
+                  <p className="text-3xl font-bold">
+                    {plans[billingPlan].priceLabel}
+                  </p>
+                  <p className="text-sm text-[#9B7B72]">
+                    per {plans[billingPlan].interval}
+                  </p>
+                </div>
               </div>
 
-              <ul className="mt-6 space-y-3 text-sm">
-                {[
-                  "Unlimited AI parenting assistant",
-                  "Unlimited logs across every feature",
-                  "Export health reports",
-                  "Works on iOS and Android with the same account",
-                ].map((item) => (
+              <p className="mt-4 text-sm font-medium text-[#2C1810]">
+                What&apos;s included
+              </p>
+              <ul className="mt-3 space-y-3 text-sm">
+                {BEBIO_PLUS.features.map((item) => (
                   <li key={item} className="flex items-start gap-3">
-                    <Check size={16} className="mt-0.5 text-[#D95C74]" />
+                    <Check size={16} className="mt-0.5 shrink-0 text-[#D95C74]" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -226,13 +239,23 @@ export function UpgradePage() {
               className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#D95C74] px-5 py-4 text-base font-semibold text-white disabled:opacity-60"
             >
               {processing ? <Loader2 className="animate-spin" size={18} /> : null}
-              {user ? "Subscribe to Bebio Plus" : "Sign in to subscribe"}
+              {user
+                ? `Subscribe — ${plans[billingPlan].billingLabel}`
+                : "Sign in to subscribe"}
             </button>
 
-            <p className="mt-4 text-center text-xs text-[#9B7B72]">
-              Secure checkout powered by Paddle. Cancel anytime from your Paddle
-              customer portal.
-            </p>
+            <div className="mt-4 space-y-2 text-center text-xs leading-5 text-[#9B7B72]">
+              <p>
+                The price at checkout will match the plan selected above (
+                {plans[billingPlan].billingLabel}).
+              </p>
+              <p>{BEBIO_PLUS.taxNote}</p>
+              <p>{BEBIO_PLUS.billingNote}</p>
+              <p>
+                Secure checkout powered by Paddle. Cancel anytime from your
+                Paddle customer portal.
+              </p>
+            </div>
           </>
         )}
 

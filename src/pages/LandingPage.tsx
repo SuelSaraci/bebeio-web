@@ -10,6 +10,7 @@ import {
   Smartphone,
 } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
+import { BEBIO_PLUS } from "../lib/pricing";
 
 const features = [
   {
@@ -48,7 +49,7 @@ export function LandingPage() {
         </div>
         <div className="flex items-center gap-3">
           <Link
-            to="/upgrade"
+            to="/#pricing"
             className="hidden rounded-full px-4 py-2 text-sm font-medium text-[#9B7B72] hover:text-[#2C1810] sm:inline"
           >
             Pricing
@@ -105,20 +106,86 @@ export function LandingPage() {
 
           <div className="rounded-[28px] bg-gradient-to-br from-[#D95C74] to-[#E11D48] p-8 text-white shadow-xl">
             <p className="text-sm uppercase tracking-wide text-white/80">
-              Bebio Plus
+              {BEBIO_PLUS.productName}
             </p>
             <h2 className="mt-2 text-3xl font-bold">Unlimited care tools</h2>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-2xl bg-white/10 p-4">
+                <p className="text-sm text-white/80">Monthly</p>
+                <p className="mt-1 text-2xl font-bold">
+                  {BEBIO_PLUS.plans.monthly.priceLabel}
+                </p>
+                <p className="text-sm text-white/90">
+                  {BEBIO_PLUS.plans.monthly.billingLabel}
+                </p>
+              </div>
+              <div className="rounded-2xl bg-white/10 p-4">
+                <p className="text-sm text-white/80">Yearly</p>
+                <p className="mt-1 text-2xl font-bold">
+                  {BEBIO_PLUS.plans.yearly.priceLabel}
+                </p>
+                <p className="text-sm text-white/90">
+                  {BEBIO_PLUS.plans.yearly.billingLabel}
+                </p>
+              </div>
+            </div>
             <ul className="mt-6 space-y-3 text-sm text-white/95">
-              <li>Unlimited AI parenting assistant</li>
-              <li>Unlimited logs across every feature</li>
-              <li>Health reports and smart reminders</li>
-              <li>Same account on iPhone and Android</li>
+              {BEBIO_PLUS.features.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
-            <p className="mt-8 text-sm text-white/80">
-              Subscribe on the web. Premium unlocks automatically in the app
-              when you sign in with the same account.
-            </p>
+            <p className="mt-6 text-sm text-white/80">{BEBIO_PLUS.taxNote}</p>
+            <Link
+              to="/upgrade"
+              className="mt-6 inline-flex rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-[#D95C74]"
+            >
+              View pricing & subscribe
+            </Link>
           </div>
+        </section>
+
+        <section
+          id="pricing"
+          className="mt-20 rounded-[32px] border border-[rgba(44,24,16,0.09)] bg-white p-8"
+        >
+          <h2 className="text-2xl font-bold">{BEBIO_PLUS.productName} pricing</h2>
+          <p className="mt-3 max-w-3xl text-[#9B7B72]">
+            Public pricing for the Bebio premium subscription. Prices shown here
+            are the same as at Paddle checkout.
+          </p>
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            {(["monthly", "yearly"] as const).map((plan) => {
+              const details = BEBIO_PLUS.plans[plan];
+              return (
+                <div
+                  key={plan}
+                  className="rounded-3xl border border-[rgba(44,24,16,0.09)] p-6"
+                >
+                  <p className="text-sm font-semibold text-[#9B7B72]">
+                    {details.label}
+                  </p>
+                  <p className="mt-2 text-4xl font-bold">{details.priceLabel}</p>
+                  <p className="mt-1 font-medium">{details.billingLabel}</p>
+                  <p className="mt-3 text-sm text-[#9B7B72]">
+                    {details.description}
+                  </p>
+                  <ul className="mt-5 space-y-2 text-sm">
+                    {BEBIO_PLUS.features.map((item) => (
+                      <li key={item}>• {item}</li>
+                    ))}
+                  </ul>
+                  <Link
+                    to="/upgrade"
+                    className="mt-6 inline-flex rounded-2xl bg-[#D95C74] px-5 py-3 text-sm font-semibold text-white"
+                  >
+                    Subscribe — {details.billingLabel}
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+          <p className="mt-6 text-sm text-[#9B7B72]">{BEBIO_PLUS.taxNote}</p>
+          <p className="mt-2 text-sm text-[#9B7B72]">{BEBIO_PLUS.billingNote}</p>
         </section>
 
         <section className="mt-20 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -165,7 +232,7 @@ export function LandingPage() {
         <div className="flex justify-center gap-4">
           <Link to="/terms">Terms</Link>
           <Link to="/privacy">Privacy</Link>
-          <Link to="/upgrade">Pricing</Link>
+          <Link to="/upgrade#pricing">Pricing</Link>
         </div>
         <p className="mt-3">© {new Date().getFullYear()} Bebio</p>
       </footer>
