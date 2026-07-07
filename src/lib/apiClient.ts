@@ -22,3 +22,29 @@ axiosInstance.interceptors.request.use(async (config) => {
   }
   return config;
 });
+
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config as
+      | (typeof error.config & { _retry?: boolean })
+      | undefined;
+    if (
+      error.response?.status === 401 &&
+      originalRequest &&
+      !originalRequest._retry
+    ) {
+      originalRequest._retry = true;
+      const token = await getIdToken(true);
+      if (token) {
+        if (!originalRequest.headers) {
+          originalRequest.headers = {} as AxiosRequestHeaders;
+        }
+        (originalRequest.headers as Record<string, string>).Authorization =
+          `Bearer ${token}`;
+        return axiosInstance(originalRequest);
+      }
+    }
+    return Promise.reject(error);
+  },
+);

@@ -243,6 +243,7 @@ export function LandingPage() {
         <div className="flex justify-center gap-4">
           <Link to="/terms">Terms</Link>
           <Link to="/privacy">Privacy</Link>
+          <Link to="/contact">Contact</Link>
           <Link to="/upgrade#pricing">Pricing</Link>
         </div>
         <p className="mt-3">© {new Date().getFullYear()} Bebio</p>

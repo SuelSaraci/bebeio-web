@@ -35,7 +35,13 @@ export function TermsPage() {
             qualified professional.
           </p>
           <h2>Contact</h2>
-          <p>For support, contact us through the email listed on bebeio.com.</p>
+          <p>
+            For support, visit{" "}
+            <Link to="/contact" className="underline">
+              bebeio.com/contact
+            </Link>{" "}
+            or email contact@cinzotech.com.
+          </p>
         </div>
       </div>
     </div>

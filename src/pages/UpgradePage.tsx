@@ -268,6 +268,9 @@ export function UpgradePage() {
           <Link to="/privacy" className="underline">
             Privacy
           </Link>
+          <Link to="/contact" className="underline">
+            Contact
+          </Link>
         </div>
       </main>
 
