@@ -30,6 +30,14 @@ export function PrivacyPage() {
             personalize responses. Do not enter information you do not want
             processed by our AI provider. AI output is not professional advice.
           </p>
+          <h2>Delete your account</h2>
+          <p>
+            To request deletion of your account and data, see our{" "}
+            <Link to="/delete-account" className="underline">
+              account deletion page
+            </Link>
+            .
+          </p>
         </div>
       </div>
     </div>
